@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cartItems = [];
     const cartElement = document.querySelector('.cart-items');
     const orderButton = document.querySelector('.order-button');
+    const header = document.querySelector('header');
 
     document.querySelectorAll('.menu-item button').forEach(button => {
         button.addEventListener('click', function() {
@@ -21,13 +22,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     orderButton.addEventListener('click', function() {
-        let message = "Hola, quiero realizar la siguiente orden:\n";
-        
+        let message = "Orden de Cafetería Las Palmas:\n\n";
         cartItems.forEach(item => {
             message += `${item.name} (x${item.quantity}): ${item.price}\n`;
         });
         
-        const whatsappUrl = `https://wa.me/+573053270668?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     });
 
@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
             li.innerHTML = `
                 <span>${item.name} - ${item.price}</span>
                 <div class="cart-item-controls">
-                    <span>x${item.quantity}</span>
                     <button class="decrease">-</button>
+                    <span>x${item.quantity}</span>
                     <button class="remove">Eliminar</button>
                 </div>
             `;
@@ -61,4 +61,12 @@ document.addEventListener('DOMContentLoaded', function() {
             cartElement.appendChild(li);
         });
     }
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+    });
 });
